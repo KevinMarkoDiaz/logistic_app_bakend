@@ -42,7 +42,7 @@ const createUser = async (req, res = response) => {
 const renewToken = async (req, res = response) => {
     const {uid, name} = req
 
-    const newToken = await createJWT(uid, name);
+    const newToken = await createJWT(uid, name );
 
     res.json({
         ok: true,
