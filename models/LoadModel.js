@@ -26,16 +26,14 @@ const loadModel = Schema({
         type:String,
         required:true
     },
-    fuel_charge:{
-        type:Map,
-        of: String,
-        required:true
-    },
-    other_bills:{
-        type:Map,
-        of: String,
-        required:true
-    }
+    fuel_charge:[{
+        name: String,
+        values: Schema.Types.Mixed
+    }],
+    other_bills:[{
+        name: String,
+        values: Schema.Types.Mixed
+    }]
 });
 
 
