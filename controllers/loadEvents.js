@@ -15,7 +15,7 @@ const createLoad = async (req, res = response) => {
     try {
         load.user = req.uid
         const loadDB = await load.save();
-        res.status(401).json({
+        res.status(200).json({
             ok: true,
             load: loadDB
         });
