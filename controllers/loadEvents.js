@@ -2,8 +2,8 @@ const { response } = require('express');
 const Load = require('../models/LoadModel');
 
 const getLoads = async (req, res = response) => {
-
-    const loads = await Load.find().populate('user', 'name')
+  
+    const loads = await Load.find({user:req.uid}).populate('user', 'name')
     res.status(200).json({
         ok: true,
         loads
