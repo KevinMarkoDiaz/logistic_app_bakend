@@ -3,7 +3,7 @@ const { checkJWT } = require('../middlewares/check-jwt');
 const {check} =require('express-validator');
 const {checkReq} = require('../middlewares/check-req')
 const { isDate } = require('../helpers/isDate');
-const { getLoads, createLoad, updateLoad, deleteLoad } = require('../controllers/loadEvents');
+const { getLoads, createLoad, updateLoad, deleteLoad, getLoad } = require('../controllers/loadEvents');
 
 /*
 Esta ruta se sirve en host + /api/loads
@@ -13,6 +13,7 @@ const router = Router();
 router.use(checkJWT)  
 
 router.get('/', getLoads)
+router.get('/:id', getLoad)
 //Create
 router.post(
     '/',

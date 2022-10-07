@@ -9,6 +9,38 @@ const getLoads = async (req, res = response) => {
         loads
     })
 };
+const getLoad = async (req, res = response) => {
+
+    const loadId = req.params.id;
+    const uid = req.uid;
+    try {
+        const load = await Load.findById(loadId);
+        if (!load) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Carga no existe con este id'
+            })
+        }
+
+        if (load.user.toString() !== uid) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'No tiene permisos para ver esta carga'
+            })
+        }             
+        return res.status(200).json({
+            ok: true,
+            load
+        })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        })
+    }
+};
 const createLoad = async (req, res = response) => {
 
     const load = new Load(req.body)
@@ -67,10 +99,9 @@ const updateLoad = async (req, res = response) => {
             msg: 'Hable con el administrador'
         })
     }
-
-
-
 };
+
+
 const deleteLoad = async (req, res = response) => {
     const loadId = req.params.id;
     const uid = req.uid;
@@ -107,6 +138,7 @@ const deleteLoad = async (req, res = response) => {
 
 module.exports = {
     getLoads,
+    getLoad,
     createLoad,
     updateLoad,
     deleteLoad
